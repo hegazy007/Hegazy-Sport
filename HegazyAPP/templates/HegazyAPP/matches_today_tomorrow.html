@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}مباريات اليوم وبكرة - HegazySport{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="welcome-message">مرحبًا بكم في HegazySport!</h1>
+    <img src="{% static 'images/logo.png' %}" alt="logo" class="my-3" width="100">
+
+    <h2 class="mt-4">مباريات اليوم</h2>
+    {% if today_matches %}
+        {% for match in today_matches %}
+            <div class="match-card my-3">
+                <div class="teams d-flex justify-content-center align-items-center">
+                    <div class="team text-center mx-3">
+                        <img src="{{ match.home_team.logo.url }}" alt="{{ match.home_team.name }}" width="60">
+                        <p>{{ match.home_team.name }}</p>
+                    </div>
+                    <div class="vs mx-2">
+                        <strong>{{ match.match_time|time:"H:i" }}</strong>
+                        <p>vs</p>
+                    </div>
+                    <div class="team text-center mx-3">
+                        <img src="{{ match.away_team.logo.url }}" alt="{{ match.away_team.name }}" width="60">
+                        <p>{{ match.away_team.name }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>لا توجد مباريات اليوم.</p>
+    {% endif %}
+
+    <h2 class="mt-5">مباريات الغد</h2>
+    {% if tomorrow_matches %}
+        {% for match in tomorrow_matches %}
+            <div class="match-card my-3">
+                <div class="teams d-flex justify-content-center align-items-center">
+                    <div class="team text-center mx-3">
+                        <img src="{{ match.home_team.logo.url }}" alt="{{ match.home_team.name }}" width="60">
+                        <p>{{ match.home_team.name }}</p>
+                    </div>
+                    <div class="vs mx-2">
+                        <strong>{{ match.match_time|time:"H:i" }}</strong>
+                        <p>vs</p>
+                    </div>
+                    <div class="team text-center mx-3">
+                        <img src="{{ match.away_team.logo.url }}" alt="{{ match.away_team.name }}" width="60">
+                        <p>{{ match.away_team.name }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>لا توجد مباريات غدًا.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,95 @@
+HegazySport/HegazyAPP/templates/HegazyAPP/
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>الصفحة الرئيسية - HegazySport</title>
+</head>
+<body>
+    <h1>مرحباً بك في HegazySport</h1>
+    <h2>المباريات القادمة</h2>
+    <ul>
+        {% for match in matches %}
+            <li>
+                {{ match.home_team.name }} vs {{ match.away_team.name }} <br>
+                {{ match.get_match_status }} <br>
+                <a href="{% url 'match_details' match.id %}">تفاصيل المباراة</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>جدول المباريات - HegazySport</title>
+</head>
+<body>
+    <h1>جدول المباريات</h1>
+    <ul>
+        {% for match in matches %}
+            <li>
+                {{ match.home_team.name }} vs {{ match.away_team.name }} <br>
+                {{ match.match_time }} <br>
+                <a href="{% url 'match_details' match.id %}">تفاصيل المباراة</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تفاصيل المباراة</title>
+</head>
+<body>
+    <h1>{{ match.home_team.name }} vs {{ match.away_team.name }}</h1>
+    <p>الوقت: {{ match.match_time }}</p>
+    <p>الموقع: {{ match.location }}</p>
+    <p>النتيجة: {{ match.get_match_status }}</p>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>النتائج المباشرة - HegazySport</title>
+</head>
+<body>
+    <h1>النتائج المباشرة</h1>
+    <ul>
+        {% for match in matches %}
+            <li>
+                {{ match.home_team.name }} vs {{ match.away_team.name }} <br>
+                النتيجة: {{ match.home_score }} - {{ match.away_score }} <br>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>التصنيفات - HegazySport</title>
+</head>
+<body>
+    <h1>التصنيفات</h1>
+    <ul>
+        {% for team in teams %}
+            <li>{{ team.name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

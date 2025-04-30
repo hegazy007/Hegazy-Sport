@@ -1,0 +1,25 @@
+from HegazyAPP.models import Match, Team
+from django.utils import timezone
+from datetime import timedelta
+
+# إنشاء فرق (إذا لم تكن موجودة بالفعل)
+team1 = Team.objects.create(name='فريق 1', logo='path_to_logo')  # استبدل 'path_to_logo' بمسار صورة إذا كنت تستخدم صورة
+team2 = Team.objects.create(name='فريق 2', logo='path_to_logo')
+
+# إنشاء مباراة (مباراة اليوم)
+match_today = Match.objects.create(
+    home_team=team1,
+    away_team=team2,
+    match_time=timezone.localtime() + timedelta(hours=2),  # مباراة بعد ساعتين
+    location='الملعب الرئيسي',
+    status='مستقبل'
+)
+
+# إنشاء مباراة (مباراة الغد)
+match_tomorrow = Match.objects.create(
+    home_team=team1,
+    away_team=team2,
+    match_time=timezone.localtime() + timedelta(days=1, hours=2),  # مباراة الغد
+    location='الملعب الرئيسي',
+    status='مستقبل'
+)
