@@ -11,7 +11,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "secret-for-dev-only")
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-secret")
+DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
 
 
 
@@ -31,7 +33,9 @@ DEBUG = True
 DEBUG_PROPAGATE_EXCEPTIONS = False
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '[::1]']
+
+
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
@@ -154,3 +158,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+print("✅ ALLOWED_HOSTS =", ALLOWED_HOSTS)
